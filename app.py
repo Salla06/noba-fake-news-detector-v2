@@ -512,6 +512,52 @@ st.markdown("""
         border-top: 2px solid var(--light-gray);
         margin: 2rem 0;
     }
+    
+    /* Boutons de sélection Texte/URL - Style rouge */
+    div[data-testid="stRadio"] > div {
+        display: flex;
+        gap: 1rem;
+        flex-direction: row !important;
+    }
+    
+    div[data-testid="stRadio"] > div > label {
+        background: linear-gradient(135deg, #DC143C 0%, #A00000 100%);
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(220, 20, 60, 0.2);
+        flex: 1;
+        text-align: center;
+        min-width: 150px;
+    }
+    
+    div[data-testid="stRadio"] > div > label:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(220, 20, 60, 0.3);
+        background: linear-gradient(135deg, #FF1744 0%, #C62828 100%);
+    }
+    
+    div[data-testid="stRadio"] > div > label[data-baseweb="radio"] > div:first-child {
+        display: none;
+    }
+    
+    div[data-testid="stRadio"] > div > label > div:last-child {
+        color: white;
+        font-weight: 600;
+    }
+    
+    /* Bouton sélectionné */
+    div[data-testid="stRadio"] > div > label:has(input:checked) {
+        background: linear-gradient(135deg, #A00000 0%, #6B0000 100%);
+        box-shadow: 0 4px 12px rgba(220, 20, 60, 0.4);
+        transform: scale(1.02);
+    }
+    
     </style>
 """, unsafe_allow_html=True)
 
@@ -624,8 +670,8 @@ else:
             
             # NOUVEAU: Choix entre Texte et URL
             input_method = st.radio(
-                "📌 Input Method" if st.session_state.language == 'en' else "📌 Méthode d'entrée",
-                ["📝 Text" if st.session_state.language == 'en' else "📝 Texte", "🔗 URL"],
+                "Input Method" if st.session_state.language == 'en' else "Méthode d'entrée",
+                ["Text" if st.session_state.language == 'en' else "Texte", "🔗 URL"],
                 horizontal=True
             )
             
@@ -960,622 +1006,822 @@ else:
                 st.info("No analyses performed yet." if st.session_state.language == 'en' else "Aucune analyse effectuée pour le moment.")
         
         with tabs[3]:
-            st.markdown("### 📊 " + t('info_title'))
+            st.markdown("### " + t('info_title'))
             st.markdown("<div style='height: 1rem;'></div>", unsafe_allow_html=True)
             
-            # Section 1: Métriques de Performance
-            st.markdown("<div class='doc-title-blue'>🎯 " + ("Performance Metrics" if st.session_state.language == 'en' else "Métriques de Performance") + "</div>", unsafe_allow_html=True)
-            
+            # Métriques principales
             col1, col2, col3, col4 = st.columns(4)
             with col1:
-                st.metric("Accuracy", "98.34%", "↑ Excellent")
+                st.markdown("""
+                    <div style='background: linear-gradient(135deg, #0052CC 0%, #003D99 100%); 
+                                padding: 1.5rem; border-radius: 12px; text-align: center; color: white;
+                                box-shadow: 0 4px 6px rgba(0,82,204,0.2);'>
+                        <div style='font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;'>98.34%</div>
+                        <div style='font-size: 0.9rem; opacity: 0.9;'>Accuracy</div>
+                    </div>
+                """, unsafe_allow_html=True)
+            
             with col2:
-                st.metric("Precision", "98.34%", "↑ High")
+                st.markdown("""
+                    <div style='background: linear-gradient(135deg, #DC143C 0%, #A00000 100%); 
+                                padding: 1.5rem; border-radius: 12px; text-align: center; color: white;
+                                box-shadow: 0 4px 6px rgba(220,20,60,0.2);'>
+                        <div style='font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;'>32,456</div>
+                        <div style='font-size: 0.9rem; opacity: 0.9;'>Articles</div>
+                    </div>
+                """, unsafe_allow_html=True)
+            
             with col3:
-                st.metric("Recall", "98.34%", "↑ High")
+                st.markdown("""
+                    <div style='background: linear-gradient(135deg, #0052CC 0%, #003D99 100%); 
+                                padding: 1.5rem; border-radius: 12px; text-align: center; color: white;
+                                box-shadow: 0 4px 6px rgba(0,82,204,0.2);'>
+                        <div style='font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;'>5</div>
+                        <div style='font-size: 0.9rem; opacity: 0.9;'>Languages</div>
+                    </div>
+                """, unsafe_allow_html=True)
+            
             with col4:
-                st.metric("F1-Score", "98.34%", "↑ Balanced")
+                st.markdown("""
+                    <div style='background: linear-gradient(135deg, #DC143C 0%, #A00000 100%); 
+                                padding: 1.5rem; border-radius: 12px; text-align: center; color: white;
+                                box-shadow: 0 4px 6px rgba(220,20,60,0.2);'>
+                        <div style='font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;'>5000</div>
+                        <div style='font-size: 0.9rem; opacity: 0.9;'>Features</div>
+                    </div>
+                """, unsafe_allow_html=True)
             
             st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
             
-            # Section 2: Spécifications Techniques
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                st.markdown("<div class='doc-title-blue'>🤖 " + t('model_specs') + "</div>", unsafe_allow_html=True)
+            # Sections avec expanders
+            with st.expander("🤖 MODEL SPECIFICATIONS", expanded=False):
+                col1, col2 = st.columns(2)
                 
-                if st.session_state.language == 'fr':
-                    st.markdown("""
-                    **Algorithme Principal**
-                    - Type: Régression Logistique (Logistic Regression)
-                    - Solveur: liblinear
-                    - Régularisation: L2
-                    - Max Iterations: 1000
-                    
-                    **Vectorisation**
-                    - Méthode: TF-IDF (Term Frequency-Inverse Document Frequency)
-                    - Nombre de features: 5000
-                    - N-grams: (1, 2) - unigrammes et bigrammes
-                    - Normalisation: L2
-                    - Min DF: 1
-                    - Max DF: 0.8
-                    
-                    **Dataset**
-                    - Total d'articles: 32,456
-                    - Articles Fake: 23,481 (72.3%)
-                    - Articles Real: 8,975 (27.7%)
-                    - Split Train/Test: 76% / 24%
-                    - Source: Kaggle Fake News Dataset
-                    """)
-                else:
-                    st.markdown("""
-                    **Primary Algorithm**
-                    - Type: Logistic Regression
-                    - Solver: liblinear
-                    - Regularization: L2
-                    - Max Iterations: 1000
-                    
-                    **Vectorization**
-                    - Method: TF-IDF (Term Frequency-Inverse Document Frequency)
-                    - Features: 5000
-                    - N-grams: (1, 2) - unigrams and bigrams
-                    - Normalization: L2
-                    - Min DF: 1
-                    - Max DF: 0.8
-                    
-                    **Dataset**
-                    - Total articles: 32,456
-                    - Fake articles: 23,481 (72.3%)
-                    - Real articles: 8,975 (27.7%)
-                    - Train/Test Split: 76% / 24%
-                    - Source: Kaggle Fake News Dataset
-                    """)
-            
-            with col2:
-                st.markdown("<div class='doc-title-red'>🌍 " + t('supported_langs') + "</div>", unsafe_allow_html=True)
+                with col1:
+                    if st.session_state.language == 'fr':
+                        st.markdown("""
+                        **Algorithme Principal**
+                        - Type: Régression Logistique
+                        - Solveur: liblinear
+                        - Régularisation: L2
+                        - Itérations: 1000
+                        
+                        **Métriques**
+                        - Accuracy: 98.34%
+                        - Precision: 98.34%
+                        - Recall: 98.34%
+                        - F1-Score: 98.34%
+                        """)
+                    else:
+                        st.markdown("""
+                        **Primary Algorithm**
+                        - Type: Logistic Regression
+                        - Solver: liblinear
+                        - Regularization: L2
+                        - Iterations: 1000
+                        
+                        **Metrics**
+                        - Accuracy: 98.34%
+                        - Precision: 98.34%
+                        - Recall: 98.34%
+                        - F1-Score: 98.34%
+                        """)
                 
-                if st.session_state.language == 'fr':
-                    st.markdown("""
-                    **Langues Supportées**
-                    - 🇬🇧 Anglais (Langue native du modèle)
-                    - 🇫🇷 Français
-                    - 🇪🇸 Espagnol
-                    - 🇸🇦 Arabe
-                    - 🇨🇳 Chinois (Simplifié)
-                    
-                    **Traduction**
-                    - Moteur: Google Translate API
-                    - Détection automatique de langue
-                    - Traduction en temps réel
-                    
-                    **Sources d'Entrée**
-                    - 📝 Texte direct
-                    - 🔗 URLs (pages web, articles)
-                    - 📄 Fichiers (.txt, .pdf, .docx, .xlsx)
-                    """)
-                else:
+                with col2:
+                    if st.session_state.language == 'fr':
+                        st.markdown("""
+                        **Vectorisation TF-IDF**
+                        - Features: 5000
+                        - N-grams: (1, 2)
+                        - Normalisation: L2
+                        - Min DF: 1
+                        - Max DF: 0.8
+                        
+                        **Dataset**
+                        - Total: 32,456 articles
+                        - Fake: 23,481 (72.3%)
+                        - Real: 8,975 (27.7%)
+                        """)
+                    else:
+                        st.markdown("""
+                        **TF-IDF Vectorization**
+                        - Features: 5000
+                        - N-grams: (1, 2)
+                        - Normalization: L2
+                        - Min DF: 1
+                        - Max DF: 0.8
+                        
+                        **Dataset**
+                        - Total: 32,456 articles
+                        - Fake: 23,481 (72.3%)
+                        - Real: 8,975 (27.7%)
+                        """)
+            
+            with st.expander("🌍 LANGUAGES & TRANSLATION", expanded=False):
+                col1, col2 = st.columns(2)
+                
+                with col1:
                     st.markdown("""
                     **Supported Languages**
-                    - 🇬🇧 English (Model's native language)
-                    - 🇫🇷 French
-                    - 🇪🇸 Spanish
-                    - 🇸🇦 Arabic
-                    - 🇨🇳 Chinese (Simplified)
-                    
-                    **Translation**
-                    - Engine: Google Translate API
-                    - Automatic language detection
-                    - Real-time translation
-                    
-                    **Input Sources**
-                    - 📝 Direct text
-                    - 🔗 URLs (web pages, articles)
-                    - 📄 Files (.txt, .pdf, .docx, .xlsx)
+                    - English (Native)
+                    - French
+                    - Spanish
+                    - Arabic
+                    - Chinese (Simplified)
+                    """)
+                
+                with col2:
+                    st.markdown("""
+                    **Translation Engine**
+                    - Google Translate API
+                    - Auto-detection
+                    - Real-time processing
                     """)
             
-            st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
+            with st.expander("🏗️ SYSTEM ARCHITECTURE", expanded=False):
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    if st.session_state.language == 'fr':
+                        st.markdown("""
+                        **Backend (Flask API)**
+                        - Hébergement: Render.com
+                        - Endpoint: `/predict`
+                        - Format: REST API (JSON)
+                        - Timeout: 60 secondes
+                        - Modèles: .pkl (pickle)
+                        """)
+                    else:
+                        st.markdown("""
+                        **Backend (Flask API)**
+                        - Hosting: Render.com
+                        - Endpoint: `/predict`
+                        - Format: REST API (JSON)
+                        - Timeout: 60 seconds
+                        - Models: .pkl (pickle)
+                        """)
+                
+                with col2:
+                    if st.session_state.language == 'fr':
+                        st.markdown("""
+                        **Frontend (Streamlit)**
+                        - Hébergement: Streamlit Cloud
+                        - Framework: Streamlit 1.29
+                        - Communication: HTTP POST
+                        - Design: IBM Plex Sans
+                        """)
+                    else:
+                        st.markdown("""
+                        **Frontend (Streamlit)**
+                        - Hosting: Streamlit Cloud
+                        - Framework: Streamlit 1.29
+                        - Communication: HTTP POST
+                        - Design: IBM Plex Sans
+                        """)
             
-            # Section 3: Architecture
-            st.markdown("<div class='doc-title-blue'>🏗️ " + ("System Architecture" if st.session_state.language == 'en' else "Architecture du Système") + "</div>", unsafe_allow_html=True)
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                if st.session_state.language == 'fr':
+            with st.expander("📁 INPUT SOURCES", expanded=False):
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
                     st.markdown("""
-                    **Backend (API Flask)**
-                    - Hébergement: Render.com
-                    - Endpoint: `/predict`
-                    - Format: REST API (JSON)
-                    - Timeout: 60 secondes
-                    - Modèle: Logistic Regression (.pkl)
-                    - Vectorizer: TF-IDF (.pkl)
-                    
-                    **Traitement**
-                    1. Réception du texte
-                    2. Nettoyage (regex, stopwords)
-                    3. Lemmatisation
-                    4. Vectorisation TF-IDF
-                    5. Prédiction
-                    6. Calcul des probabilités
+                    **Direct Text**
+                    - Copy-paste
+                    - Minimum 20 chars
+                    - Any language
                     """)
-                else:
+                
+                with col2:
                     st.markdown("""
-                    **Backend (Flask API)**
-                    - Hosting: Render.com
-                    - Endpoint: `/predict`
-                    - Format: REST API (JSON)
-                    - Timeout: 60 seconds
-                    - Model: Logistic Regression (.pkl)
-                    - Vectorizer: TF-IDF (.pkl)
-                    
-                    **Processing**
-                    1. Text reception
-                    2. Cleaning (regex, stopwords)
-                    3. Lemmatization
-                    4. TF-IDF vectorization
-                    5. Prediction
-                    6. Probability calculation
+                    **URLs**
+                    - Web pages (HTML)
+                    - PDF documents
+                    - DOCX files
                     """)
-            
-            with col2:
-                if st.session_state.language == 'fr':
+                
+                with col3:
                     st.markdown("""
-                    **Frontend (Streamlit)**
-                    - Hébergement: Streamlit Cloud
-                    - Framework: Streamlit 1.29
-                    - Communication: HTTP POST
-                    - Design: IBM Plex Sans
-                    
-                    **Fonctionnalités**
-                    - Analyse de texte
-                    - Extraction depuis URL
-                    - Upload de fichiers
-                    - Traduction multilingue
-                    - Historique avec graphiques
-                    - Export CSV
-                    - Interface bilingue FR/EN
-                    """)
-                else:
-                    st.markdown("""
-                    **Frontend (Streamlit)**
-                    - Hosting: Streamlit Cloud
-                    - Framework: Streamlit 1.29
-                    - Communication: HTTP POST
-                    - Design: IBM Plex Sans
-                    
-                    **Features**
-                    - Text analysis
-                    - URL extraction
-                    - File upload
-                    - Multilingual translation
-                    - History with charts
-                    - CSV export
-                    - Bilingual UI FR/EN
-                    """)
-            
-            st.markdown("<div class='doc-title-blue'>" + t('tech_features') + "</div>", unsafe_allow_html=True)
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                if st.session_state.language == 'fr':
-                    st.markdown("""
-                    **Traitement du Texte**
-                    - Vectorisation TF-IDF
-                    - 5000 Caractéristiques
-                    - N-grammes: (1, 2)
-                    - Normalisation L2
-                    """)
-                else:
-                    st.markdown("""
-                    **Text Processing**
-                    - TF-IDF Vectorization
-                    - 5000 Features
-                    - N-grams: (1, 2)
-                    - L2 Normalization
-                    """)
-            with col2:
-                if st.session_state.language == 'fr':
-                    st.markdown("""
-                    **Support de Fichiers**
-                    - Documents Word (.docx)
-                    - Fichiers PDF (.pdf)
-                    - Fichiers Texte (.txt)
-                    - Feuilles Excel (.xlsx)
-                    """)
-                else:
-                    st.markdown("""
-                    **File Support**
-                    - Word Documents (.docx)
-                    - PDF Files (.pdf)
-                    - Text Files (.txt)
-                    - Excel Spreadsheets (.xlsx)
-                    """)
-            with col3:
-                if st.session_state.language == 'fr':
-                    st.markdown("""
-                    **Sortie d'Analyse**
-                    - Classification Binaire
-                    - Score de Confiance
-                    - Distribution de Probabilité
-                    - Métriques Détaillées
-                    """)
-                else:
-                    st.markdown("""
-                    **Analysis Output**
-                    - Binary Classification
-                    - Confidence Scoring
-                    - Probability Distribution
-                    - Detailed Metrics
+                    **File Upload**
+                    - .txt
+                    - .pdf
+                    - .docx
+                    - .xlsx
                     """)
         
         with tabs[4]:
-            st.markdown("### 📚 " + t('tab_doc'))
+            st.markdown("### " + t('tab_doc'))
             st.markdown("<div style='height: 1rem;'></div>", unsafe_allow_html=True)
             
             if st.session_state.language == 'fr':
-                # SECTION 1: Vue d'Ensemble
-                st.markdown("<div class='doc-title-blue'>🎯 Vue d'Ensemble du Système</div>", unsafe_allow_html=True)
-                st.markdown("""
-                Le **Détecteur de Fake News FCC** est un système avancé d'apprentissage automatique conçu pour identifier 
-                la désinformation et les fake news avec une précision de 98.34%. Développé en 2024, il utilise un modèle 
-                de **Régression Logistique** entraîné sur plus de 32,000 articles provenant du dataset Kaggle Fake News.
-                
-                Le système supporte **5 langues** et offre une interface bilingue Français/Anglais pour une utilisation 
-                accessible à un public international.
-                """)
-                
-                st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-                
-                # SECTION 2: Comment ça fonctionne
-                st.markdown("<div class='doc-title-red'>⚙️ Comment Ça Fonctionne</div>", unsafe_allow_html=True)
-                
-                col1, col2 = st.columns(2)
-                
-                with col1:
+                # ========== SECTION 1: VUE D'ENSEMBLE ==========
+                with st.expander("📋 VUE D'ENSEMBLE DU SYSTÈME", expanded=True):
                     st.markdown("""
-                    **Pipeline de Traitement**
+                    Le **Détecteur de Fake News FCC** est un système avancé d'apprentissage automatique conçu pour identifier 
+                    la désinformation et les fake news avec une précision de **98.34%**.
                     
-                    1. **Saisie du Texte**
-                       - Texte direct (copier-coller)
-                       - Extraction depuis URL (pages web, PDF)
-                       - Upload de fichier (TXT, PDF, DOCX, XLSX)
-                    
-                    2. **Détection de Langue**
-                       - Détection automatique via langdetect
-                       - Support de 5 langues
-                    
-                    3. **Traduction (si nécessaire)**
-                       - Traduction vers l'anglais via Google Translate
-                       - Préservation du texte original
-                    
-                    4. **Prétraitement**
-                       - Nettoyage du texte (regex)
-                       - Suppression des stopwords
-                       - Lemmatisation (WordNet)
+                    **Points Clés:**
+                    - Modèle: Régression Logistique
+                    - Dataset: 32,456 articles (Kaggle)
+                    - Support: 5 langues
+                    - Architecture: Backend Flask + Frontend Streamlit
                     """)
                 
-                with col2:
-                    st.markdown("""
-                    **Analyse et Classification**
+                # ========== SECTION 2: COMMENT ÇA FONCTIONNE ==========
+                with st.expander("⚙️ COMMENT ÇA FONCTIONNE", expanded=False):
+                    col1, col2 = st.columns(2)
                     
-                    5. **Vectorisation TF-IDF**
-                       - Transformation en vecteur numérique
-                       - 5000 features
-                       - N-grams (1,2)
+                    with col1:
+                        st.markdown("""
+                        **Étapes 1-4: Acquisition et Préparation**
+                        
+                        **1. Saisie du Texte**
+                        - Texte direct (copier-coller)
+                        - Extraction depuis URL
+                        - Upload de fichier
+                        
+                        **2. Détection de Langue**
+                        - Détection automatique
+                        - 5 langues supportées
+                        
+                        **3. Traduction**
+                        - Google Translate API
+                        - Vers l'anglais si nécessaire
+                        
+                        **4. Prétraitement**
+                        - Nettoyage (regex)
+                        - Suppression stopwords
+                        - Lemmatisation
+                        """)
                     
-                    6. **Prédiction**
-                       - Classification via Logistic Regression
-                       - Calcul des probabilités (Fake vs Real)
+                    with col2:
+                        st.markdown("""
+                        **Étapes 5-7: Analyse et Résultats**
+                        
+                        **5. Vectorisation**
+                        - TF-IDF
+                        - 5000 features
+                        - N-grams (1,2)
+                        
+                        **6. Prédiction**
+                        - Logistic Regression
+                        - Probabilités calculées
+                        
+                        **7. Résultats**
+                        - Label FAKE/REAL
+                        - Score de confiance
+                        - Graphiques interactifs
+                        """)
+                
+                # ========== SECTION 3: GUIDE D'UTILISATION ==========
+                with st.expander("📖 GUIDE D'UTILISATION", expanded=False):
+                    tab1, tab2, tab3 = st.tabs(["Analyse Texte", "Upload Fichier", "Historique"])
                     
-                    7. **Résultats**
-                       - Label: FAKE ou REAL
-                       - Score de confiance (%)
-                       - Distribution des probabilités
-                       - Graphiques interactifs
-                    """)
-                
-                st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-                
-                # SECTION 3: Guide d'Utilisation
-                st.markdown("<div class='doc-title-blue'>📖 Guide d'Utilisation</div>", unsafe_allow_html=True)
-                
-                st.markdown("""
-                **Méthode 1: Analyse de Texte**
-                1. Aller dans l'onglet "Analyse de Texte"
-                2. Choisir "📝 Texte" ou "🔗 URL"
-                3. Coller le texte ou l'URL
-                4. Sélectionner la langue (ou auto)
-                5. Cliquer "Analyser"
-                6. Consulter les résultats (30-60s si première requête)
-                
-                **Méthode 2: Upload de Fichier**
-                1. Aller dans l'onglet "Téléchargement de Fichier"
-                2. Sélectionner un fichier (.txt, .pdf, .docx, .xlsx)
-                3. Choisir la langue du document
-                4. Cliquer "Analyser le Fichier"
-                5. Le texte est extrait et analysé automatiquement
-                
-                **Historique**
-                - Toutes les analyses sont sauvegardées dans l'onglet "Historique"
-                - Visualisation avec graphiques interactifs
-                - Export possible en CSV
-                """)
-                
-                st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-                
-                # SECTION 4: Reproduction du Travail
-                st.markdown("<div class='doc-title-red'>🔬 Reproduire Notre Travail</div>", unsafe_allow_html=True)
-                
-                st.markdown("""
-                **Étape 1: Préparation des Données**
-                ```python
-                import pandas as pd
-                
-                # Charger le dataset Kaggle
-                df = pd.read_csv('fake_news_dataset.csv')
-                
-                # Nettoyage
-                df = df.dropna()
-                df['text'] = df['title'] + ' ' + df['text']
-                
-                # Labels: 0 = FAKE, 1 = REAL
-                X = df['text']
-                y = df['label']
-                ```
-                
-                **Étape 2: Prétraitement**
-                ```python
-                import re
-                import nltk
-                from nltk.corpus import stopwords
-                from nltk.stem import WordNetLemmatizer
-                
-                nltk.download('stopwords')
-                nltk.download('wordnet')
-                
-                def clean_text(text):
-                    # Lowercase
-                    text = text.lower()
+                    with tab1:
+                        st.markdown("""
+                        **Méthode 1: Texte Direct**
+                        1. Onglet "Analyse de Texte"
+                        2. Sélectionner "Text"
+                        3. Coller votre texte
+                        4. Choisir la langue (ou auto)
+                        5. Cliquer "Analyser"
+                        6. Attendre 30-60s (première fois)
+                        
+                        **Méthode 2: Depuis URL**
+                        1. Onglet "Analyse de Texte"
+                        2. Sélectionner "URL"
+                        3. Coller l'URL de l'article
+                        4. Le texte est extrait automatiquement
+                        5. Cliquer "Analyser"
+                        """)
                     
-                    # Supprimer URLs
-                    text = re.sub(r'http\S+|www\S+', '', text)
+                    with tab2:
+                        st.markdown("""
+                        **Upload de Fichier**
+                        1. Onglet "Téléchargement de Fichier"
+                        2. Cliquer "Browse files"
+                        3. Sélectionner un fichier (.txt, .pdf, .docx, .xlsx)
+                        4. Choisir la langue du document
+                        5. Cliquer "Analyser le Fichier"
+                        6. Le texte est extrait et analysé
+                        """)
                     
-                    # Supprimer caractères spéciaux
-                    text = re.sub(r'[^a-zA-Z\s]', '', text)
+                    with tab3:
+                        st.markdown("""
+                        **Consulter l'Historique**
+                        1. Onglet "Historique de l'Analyse"
+                        2. Visualiser toutes vos analyses
+                        3. Graphiques interactifs (Plotly)
+                        4. Statistiques globales
+                        5. Export CSV possible
+                        """)
+                
+                # ========== SECTION 4: REPRODUIRE LE TRAVAIL ==========
+                with st.expander("🔬 REPRODUIRE NOTRE TRAVAIL (CODE COMPLET)", expanded=False):
+                    tab1, tab2, tab3, tab4 = st.tabs(["Données", "Modèle", "API", "Frontend"])
                     
-                    # Supprimer stopwords
-                    stop_words = set(stopwords.words('english'))
-                    words = text.split()
-                    words = [w for w in words if w not in stop_words]
-                    
-                    # Lemmatisation
-                    lemmatizer = WordNetLemmatizer()
-                    words = [lemmatizer.lemmatize(w) for w in words]
-                    
-                    return ' '.join(words)
-                
-                X = X.apply(clean_text)
-                ```
-                
-                **Étape 3: Vectorisation TF-IDF**
-                ```python
-                from sklearn.feature_extraction.text import TfidfVectorizer
-                
-                vectorizer = TfidfVectorizer(
-                    max_features=5000,
-                    ngram_range=(1, 2),
-                    min_df=1,
-                    max_df=0.8
-                )
-                
-                X_vectorized = vectorizer.fit_transform(X)
-                ```
-                
-                **Étape 4: Entraînement du Modèle**
-                ```python
-                from sklearn.model_selection import train_test_split
-                from sklearn.linear_model import LogisticRegression
-                from sklearn.metrics import accuracy_score, classification_report
-                
-                # Split
-                X_train, X_test, y_train, y_test = train_test_split(
-                    X_vectorized, y, test_size=0.24, random_state=42
-                )
-                
-                # Modèle
-                model = LogisticRegression(
-                    max_iter=1000,
-                    solver='liblinear',
-                    random_state=42
-                )
-                
-                # Entraînement
-                model.fit(X_train, y_train)
-                
-                # Évaluation
-                y_pred = model.predict(X_test)
-                accuracy = accuracy_score(y_test, y_pred)
-                print(f'Accuracy: {accuracy:.4f}')  # 98.34%
-                print(classification_report(y_test, y_pred))
-                ```
-                
-                **Étape 5: Sauvegarde des Modèles**
-                ```python
-                import pickle
-                
-                # Sauvegarder le modèle
-                with open('fake_news_model.pkl', 'wb') as f:
-                    pickle.dump(model, f)
-                
-                # Sauvegarder le vectorizer
-                with open('tfidf_vectorizer.pkl', 'wb') as f:
-                    pickle.dump(vectorizer, f)
-                ```
-                
-                **Étape 6: Déploiement**
-                
-                *Backend (API Flask):*
-                ```python
-                from flask import Flask, request, jsonify
-                import pickle
-                
-                app = Flask(__name__)
-                
-                # Charger modèles
-                model = pickle.load(open('fake_news_model.pkl', 'rb'))
-                vectorizer = pickle.load(open('tfidf_vectorizer.pkl', 'rb'))
-                
-                @app.route('/predict', methods=['POST'])
-                def predict():
-                    data = request.json
-                    text = data['text']
-                    
-                    # Prétraiter
-                    text_clean = clean_text(text)
-                    
-                    # Vectoriser
-                    text_vec = vectorizer.transform([text_clean])
-                    
-                    # Prédire
-                    prediction = model.predict(text_vec)[0]
-                    probabilities = model.predict_proba(text_vec)[0]
-                    
-                    return jsonify({
-                        'prediction': int(prediction),
-                        'label': 'REAL' if prediction == 1 else 'FAKE',
-                        'confidence': float(max(probabilities)),
-                        'probabilities': {
-                            'fake': float(probabilities[0]),
-                            'real': float(probabilities[1])
-                        }
-                    })
-                
-                if __name__ == '__main__':
-                    app.run()
-                ```
-                
-                *Frontend (Streamlit):*
-                ```python
-                import streamlit as st
-                import requests
-                
-                st.title("Fake News Detector")
-                
-                text = st.text_area("Enter article text")
-                
-                if st.button("Analyze"):
-                    response = requests.post(
-                        "https://your-api.com/predict",
-                        json={"text": text}
-                    )
-                    result = response.json()
-                    
-                    st.write(f"Label: {result['label']}")
-                    st.write(f"Confidence: {result['confidence']:.2%}")
-                ```
-                """)
-                
-                st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-                
-                # SECTION 5: Meilleures Pratiques
-                st.markdown("<div class='doc-title-blue'>✅ Meilleures Pratiques</div>", unsafe_allow_html=True)
-                
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    st.markdown("""
-                    **Pour de Meilleurs Résultats**
-                    - Fournir le texte complet de l'article (>100 mots)
-                    - Utiliser du texte bien formaté
-                    - Éviter les textes trop courts (<20 caractères)
-                    - Vérifier la langue détectée
-                    - Attendre 30-60s si première requête (API se réveille)
-                    
-                    **Formats Recommandés**
-                    - Articles de presse complets
-                    - Posts de blog
-                    - Communiqués de presse
-                    - Contenu web structuré
-                    """)
-                
-                with col2:
-                    st.markdown("""
-                    **À Éviter**
-                    - Textes de moins de 20 caractères
-                    - Textes non structurés ou mal formatés
-                    - Listes de mots-clés
-                    - Textes avec beaucoup de bruit (HTML, code)
-                    - Images de texte (utiliser OCR d'abord)
-                    
-                    **Note sur les URLs**
-                    - L'extraction fonctionne mieux avec du HTML propre
-                    - Certains sites bloquent les scrapers
-                    - Les PDF et DOCX en ligne sont supportés
-                    """)
-                
-                st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-                
-                # SECTION 6: Limitations
-                st.markdown("<div class='doc-title-red'>⚠️ Limitations et Considérations</div>", unsafe_allow_html=True)
-                
-                st.markdown("""
-                **Limitations Techniques**
-                - Le modèle est entraîné sur des articles en anglais (2016-2017)
-                - La traduction automatique peut introduire des erreurs
-                - Performance optimale sur des textes de >100 mots
-                - La qualité de l'extraction URL dépend de la structure du site
-                
-                **Limitations du Modèle**
-                - Le modèle détecte des patterns linguistiques, pas la véracité factuelle
-                - Peut être trompé par du contenu satirique bien écrit
-                - Dataset daté (2016-2017), les fake news évoluent
-                - Biais potentiel du dataset d'entraînement
-                
-                **API Render (Plan Gratuit)**
-                - Se met en veille après 15 minutes d'inactivité
-                - Première requête: 30-60 secondes (cold start)
-                - Requêtes suivantes: <2 secondes
-                
-                **Recommandations**
-                - Utiliser comme outil d'aide à la décision, pas comme vérité absolue
-                - Croiser avec d'autres sources et fact-checkers
-                - Tenir compte du contexte et de la date de publication
-                - Vérifier les sources originales
-                """)
-                
-                st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-                
-                # SECTION 7: Ressources
-                st.markdown("<div class='doc-title-blue'>📦 Ressources et Code Source</div>", unsafe_allow_html=True)
-                
-                st.markdown("""
-                **Code Source**
-                - GitHub: https://github.com/noba-ibrahim/fcc-fake-news-detector-v2
-                - Backend API: https://fcc-fake-news-detector-v2.onrender.com
-                
-                **Dataset**
-                - Kaggle Fake News Dataset
-                - 32,456 articles (72.3% fake, 27.7% real)
-                
-                **Technologies Utilisées**
-                - Python 3.11
-                - Scikit-learn 1.5.2
-                - NLTK 3.8.1
-                - Flask 3.0 (Backend)
-                - Streamlit 1.29 (Frontend)
-                - BeautifulSoup4 4.12 (Web scraping)
-                - Google Translate API (Traduction)
-                
-                **Hébergement**
-                - Backend: Render.com (Free tier)
-                - Frontend: Streamlit Cloud (Free tier)
-                
-                **Contact**
-                - Équipe: FCC Development Team
-                - Année: 2024
-                """)
+                    with tab1:
+                        st.code("""
+# ÉTAPE 1: Préparation des Données
+import pandas as pd
+
+# Charger le dataset Kaggle Fake News
+df = pd.read_csv('fake_news_dataset.csv')
+df = df.dropna()
+df['text'] = df['title'] + ' ' + df['text']
+
+# Labels: 0 = FAKE, 1 = REAL
+X = df['text']
+y = df['label']
+
+# ÉTAPE 2: Prétraitement
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r'http\S+|www\S+', '', text)
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
     
+    stop_words = set(stopwords.words('english'))
+    words = [w for w in text.split() if w not in stop_words]
+    
+    lemmatizer = WordNetLemmatizer()
+    words = [lemmatizer.lemmatize(w) for w in words]
+    
+    return ' '.join(words)
+
+X = X.apply(clean_text)
+                        """, language='python')
+                    
+                    with tab2:
+                        st.code("""
+# ÉTAPE 3: Vectorisation et Entraînement
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Vectorisation TF-IDF
+vectorizer = TfidfVectorizer(
+    max_features=5000,
+    ngram_range=(1, 2),
+    min_df=1,
+    max_df=0.8
+)
+
+X_vectorized = vectorizer.fit_transform(X)
+
+# Split Train/Test
+X_train, X_test, y_train, y_test = train_test_split(
+    X_vectorized, y, test_size=0.24, random_state=42
+)
+
+# Modèle
+model = LogisticRegression(
+    max_iter=1000,
+    solver='liblinear',
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+# Évaluation
+from sklearn.metrics import accuracy_score
+y_pred = model.predict(X_test)
+print(f'Accuracy: {accuracy_score(y_test, y_pred):.4f}')
+
+# Sauvegarder
+import pickle
+pickle.dump(model, open('model.pkl', 'wb'))
+pickle.dump(vectorizer, open('vectorizer.pkl', 'wb'))
+                        """, language='python')
+                    
+                    with tab3:
+                        st.code("""
+# ÉTAPE 4: API Flask (Backend)
+from flask import Flask, request, jsonify
+import pickle
+
+app = Flask(__name__)
+
+model = pickle.load(open('model.pkl', 'rb'))
+vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.json
+    text = data['text']
+    
+    # Prétraiter
+    text_clean = clean_text(text)
+    
+    # Vectoriser
+    text_vec = vectorizer.transform([text_clean])
+    
+    # Prédire
+    prediction = model.predict(text_vec)[0]
+    probabilities = model.predict_proba(text_vec)[0]
+    
+    return jsonify({
+        'prediction': int(prediction),
+        'probabilities': {
+            'fake': float(probabilities[0]),
+            'real': float(probabilities[1])
+        }
+    })
+
+if __name__ == '__main__':
+    app.run()
+                        """, language='python')
+                    
+                    with tab4:
+                        st.code("""
+# ÉTAPE 5: Frontend Streamlit
+import streamlit as st
+import requests
+
+st.title("Fake News Detector")
+
+text = st.text_area("Enter article text")
+
+if st.button("Analyze"):
+    response = requests.post(
+        "https://your-api.com/predict",
+        json={"text": text},
+        timeout=60
+    )
+    
+    result = response.json()
+    prediction = result['prediction']
+    probs = result['probabilities']
+    
+    if prediction == 0:
+        st.error("FAKE NEWS DETECTED")
     else:
+        st.success("RELIABLE ARTICLE")
+    
+    st.write(f"Confidence: {max(probs.values()):.2%}")
+                        """, language='python')
+                
+                # ========== SECTION 5: MEILLEURES PRATIQUES ==========
+                with st.expander("✅ MEILLEURES PRATIQUES & LIMITATIONS", expanded=False):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.markdown("""
+                        **Pour de Meilleurs Résultats**
+                        - Texte complet (>100 mots)
+                        - Texte bien formaté
+                        - Éviter textes trop courts
+                        - Vérifier la langue
+                        - Attendre 30-60s (première fois)
+                        
+                        **Formats Recommandés**
+                        - Articles de presse
+                        - Posts de blog
+                        - Communiqués de presse
+                        """)
+                    
+                    with col2:
+                        st.markdown("""
+                        **Limitations**
+                        - Modèle entraîné sur anglais
+                        - Traduction peut affecter résultats
+                        - Dataset de 2016-2017
+                        - Détecte patterns, pas véracité
+                        - API gratuite (cold start 30-60s)
+                        
+                        **Recommandations**
+                        - Outil d'aide, pas vérité absolue
+                        - Croiser avec d'autres sources
+                        """)
+                
+                # ========== SECTION 6: RESSOURCES ==========
+                with st.expander("📦 RESSOURCES & LIENS", expanded=False):
+                    st.markdown("""
+                    **Code Source**
+                    - GitHub: https://github.com/noba-ibrahim/fcc-fake-news-detector-v2
+                    - Backend API: https://fcc-fake-news-detector-v2.onrender.com
+                    
+                    **Dataset**
+                    - Kaggle Fake News Dataset
+                    - 32,456 articles
+                    
+                    **Technologies**
+                    - Python 3.11
+                    - Scikit-learn 1.5.2
+                    - Flask 3.0
+                    - Streamlit 1.29
+                    - BeautifulSoup4 4.12
+                    
+                    **Contact**
+                    - FCC Development Team
+                    - 2024
+                    """)
+            
+            else:  # VERSION ANGLAISE
+                with st.expander("📋 SYSTEM OVERVIEW", expanded=True):
+                    st.markdown("""
+                    The **FCC Fake News Detector** is an advanced machine learning system designed to identify 
+                    misinformation and fake news with **98.34% accuracy**.
+                    
+                    **Key Points:**
+                    - Model: Logistic Regression
+                    - Dataset: 32,456 articles (Kaggle)
+                    - Support: 5 languages
+                    - Architecture: Flask Backend + Streamlit Frontend
+                    """)
+                
+                with st.expander("⚙️ HOW IT WORKS", expanded=False):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.markdown("""
+                        **Steps 1-4: Acquisition & Preparation**
+                        
+                        **1. Text Input**
+                        - Direct text (copy-paste)
+                        - URL extraction
+                        - File upload
+                        
+                        **2. Language Detection**
+                        - Automatic detection
+                        - 5 supported languages
+                        
+                        **3. Translation**
+                        - Google Translate API
+                        - To English if needed
+                        
+                        **4. Preprocessing**
+                        - Cleaning (regex)
+                        - Stopwords removal
+                        - Lemmatization
+                        """)
+                    
+                    with col2:
+                        st.markdown("""
+                        **Steps 5-7: Analysis & Results**
+                        
+                        **5. Vectorization**
+                        - TF-IDF
+                        - 5000 features
+                        - N-grams (1,2)
+                        
+                        **6. Prediction**
+                        - Logistic Regression
+                        - Probabilities computed
+                        
+                        **7. Results**
+                        - FAKE/REAL label
+                        - Confidence score
+                        - Interactive charts
+                        """)
+                
+                with st.expander("📖 USER GUIDE", expanded=False):
+                    tab1, tab2, tab3 = st.tabs(["Text Analysis", "File Upload", "History"])
+                    
+                    with tab1:
+                        st.markdown("""
+                        **Method 1: Direct Text**
+                        1. "Text Analysis" tab
+                        2. Select "Text"
+                        3. Paste your text
+                        4. Choose language (or auto)
+                        5. Click "Analyze"
+                        6. Wait 30-60s (first time)
+                        
+                        **Method 2: From URL**
+                        1. "Text Analysis" tab
+                        2. Select "URL"
+                        3. Paste article URL
+                        4. Text extracted automatically
+                        5. Click "Analyze"
+                        """)
+                    
+                    with tab2:
+                        st.markdown("""
+                        **File Upload**
+                        1. "File Upload" tab
+                        2. Click "Browse files"
+                        3. Select file (.txt, .pdf, .docx, .xlsx)
+                        4. Choose document language
+                        5. Click "Analyze File"
+                        6. Text extracted and analyzed
+                        """)
+                    
+                    with tab3:
+                        st.markdown("""
+                        **View History**
+                        1. "Analysis History" tab
+                        2. View all your analyses
+                        3. Interactive charts (Plotly)
+                        4. Global statistics
+                        5. CSV export available
+                        """)
+                
+                with st.expander("🔬 REPRODUCE OUR WORK (COMPLETE CODE)", expanded=False):
+                    tab1, tab2, tab3, tab4 = st.tabs(["Data", "Model", "API", "Frontend"])
+                    
+                    with tab1:
+                        st.code("""
+# STEP 1: Data Preparation
+import pandas as pd
+
+# Load Kaggle Fake News Dataset
+df = pd.read_csv('fake_news_dataset.csv')
+df = df.dropna()
+df['text'] = df['title'] + ' ' + df['text']
+
+# Labels: 0 = FAKE, 1 = REAL
+X = df['text']
+y = df['label']
+
+# STEP 2: Preprocessing
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r'http\S+|www\S+', '', text)
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
+    
+    stop_words = set(stopwords.words('english'))
+    words = [w for w in text.split() if w not in stop_words]
+    
+    lemmatizer = WordNetLemmatizer()
+    words = [lemmatizer.lemmatize(w) for w in words]
+    
+    return ' '.join(words)
+
+X = X.apply(clean_text)
+                        """, language='python')
+                    
+                    with tab2:
+                        st.code("""
+# STEP 3: Vectorization & Training
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# TF-IDF Vectorization
+vectorizer = TfidfVectorizer(
+    max_features=5000,
+    ngram_range=(1, 2),
+    min_df=1,
+    max_df=0.8
+)
+
+X_vectorized = vectorizer.fit_transform(X)
+
+# Train/Test Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X_vectorized, y, test_size=0.24, random_state=42
+)
+
+# Model
+model = LogisticRegression(
+    max_iter=1000,
+    solver='liblinear',
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+# Evaluation
+from sklearn.metrics import accuracy_score
+y_pred = model.predict(X_test)
+print(f'Accuracy: {accuracy_score(y_test, y_pred):.4f}')
+
+# Save
+import pickle
+pickle.dump(model, open('model.pkl', 'wb'))
+pickle.dump(vectorizer, open('vectorizer.pkl', 'wb'))
+                        """, language='python')
+                    
+                    with tab3:
+                        st.code("""
+# STEP 4: Flask API (Backend)
+from flask import Flask, request, jsonify
+import pickle
+
+app = Flask(__name__)
+
+model = pickle.load(open('model.pkl', 'rb'))
+vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.json
+    text = data['text']
+    
+    # Preprocess
+    text_clean = clean_text(text)
+    
+    # Vectorize
+    text_vec = vectorizer.transform([text_clean])
+    
+    # Predict
+    prediction = model.predict(text_vec)[0]
+    probabilities = model.predict_proba(text_vec)[0]
+    
+    return jsonify({
+        'prediction': int(prediction),
+        'probabilities': {
+            'fake': float(probabilities[0]),
+            'real': float(probabilities[1])
+        }
+    })
+
+if __name__ == '__main__':
+    app.run()
+                        """, language='python')
+                    
+                    with tab4:
+                        st.code("""
+# STEP 5: Streamlit Frontend
+import streamlit as st
+import requests
+
+st.title("Fake News Detector")
+
+text = st.text_area("Enter article text")
+
+if st.button("Analyze"):
+    response = requests.post(
+        "https://your-api.com/predict",
+        json={"text": text},
+        timeout=60
+    )
+    
+    result = response.json()
+    prediction = result['prediction']
+    probs = result['probabilities']
+    
+    if prediction == 0:
+        st.error("FAKE NEWS DETECTED")
+    else:
+        st.success("RELIABLE ARTICLE")
+    
+    st.write(f"Confidence: {max(probs.values()):.2%}")
+                        """, language='python')
+                
+                with st.expander("✅ BEST PRACTICES & LIMITATIONS", expanded=False):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.markdown("""
+                        **For Best Results**
+                        - Complete text (>100 words)
+                        - Well-formatted text
+                        - Avoid very short texts
+                        - Check detected language
+                        - Wait 30-60s (first time)
+                        
+                        **Recommended Formats**
+                        - News articles
+                        - Blog posts
+                        - Press releases
+                        """)
+                    
+                    with col2:
+                        st.markdown("""
+                        **Limitations**
+                        - Model trained on English
+                        - Translation may affect results
+                        - Dataset from 2016-2017
+                        - Detects patterns, not truth
+                        - Free API (cold start 30-60s)
+                        
+                        **Recommendations**
+                        - Use as aid, not absolute truth
+                        - Cross-check with other sources
+                        """)
+                
+                with st.expander("📦 RESOURCES & LINKS", expanded=False):
+                    st.markdown("""
+                    **Source Code**
+                    - GitHub: https://github.com/noba-ibrahim/fcc-fake-news-detector-v2
+                    - Backend API: https://fcc-fake-news-detector-v2.onrender.com
+                    
+                    **Dataset**
+                    - Kaggle Fake News Dataset
+                    - 32,456 articles
+                    
+                    **Technologies**
+                    - Python 3.11
+                    - Scikit-learn 1.5.2
+                    - Flask 3.0
+                    - Streamlit 1.29
+                    - BeautifulSoup4 4.12
+                    
+                    **Contact**
+                    - FCC Development Team
+                    - 2024
+                    """)
+        
+        else:
         st.error("Error: Unable to load machine learning models" if st.session_state.language == 'en' else "Erreur: Impossible de charger les modèles")
     
     # Footer
