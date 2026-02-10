@@ -59,7 +59,7 @@ TRANSLATIONS = {
         'title': 'FCC FAKE NEWS DETECTOR',
         'subtitle': 'Machine Learning Detection System',
         'hero_title': 'FCC Fake News Detector',
-        'hero_subtitle': 'Advanced AI-powered system for detecting misinformation and fake news with industry-leading accuracy',
+        'hero_subtitle': 'Advanced AI-powered system for detecting misinformation and fake news with industry-leading precision of 99.69%',
         'discover_btn': 'DISCOVER THE SYSTEM',
         'tab_text': 'Text Analysis',
         'tab_file': 'File Upload',
@@ -106,7 +106,7 @@ TRANSLATIONS = {
         'title': 'DÉTECTEUR DE FAKE NEWS FCC',
         'subtitle': 'Système de Détection par Apprentissage Automatique',
         'hero_title': 'Détecteur de Fake News FCC',
-        'hero_subtitle': 'Système avancé basé sur l\'IA pour détecter la désinformation et les fake news avec une précision exceptionnelle de 99.72%',
+        'hero_subtitle': 'Système avancé basé sur l\'IA pour détecter la désinformation et les fake news avec une précision exceptionnelle de 99.69%',
         'discover_btn': 'DÉCOUVRIR LE SYSTÈME',
         'tab_text': 'Analyse de Texte',
         'tab_file': 'Téléchargement de Fichier',
@@ -1523,7 +1523,7 @@ if st.button("Analyze"):
                 with st.expander("SYSTEM OVERVIEW", expanded=True):
                     st.markdown("""
                     The **FCC Fake News Detector** is an advanced machine learning system designed to identify 
-                    misinformation and fake news with **99.72% accuracy**.
+                    misinformation and fake news with **99.69% precision**.
                     
                     **Key Points:**
                     - Model: Random Forest Optimized
