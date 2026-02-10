@@ -1820,8 +1820,8 @@ if st.button("Analyze"):
                     - FCC Development Team
                     - 2024
                     """)
-        
-        else:
+    
+    else:
         st.error("Error: Unable to load machine learning models" if st.session_state.language == 'en' else "Erreur: Impossible de charger les modèles")
     
     # Footer
