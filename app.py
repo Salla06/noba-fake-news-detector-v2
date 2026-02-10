@@ -106,7 +106,7 @@ TRANSLATIONS = {
         'title': 'DÉTECTEUR DE FAKE NEWS FCC',
         'subtitle': 'Système de Détection par Apprentissage Automatique',
         'hero_title': 'Détecteur de Fake News FCC',
-        'hero_subtitle': 'Système avancé basé sur l\'IA pour détecter la désinformation et les fake news avec une précision de pointe',
+        'hero_subtitle': 'Système avancé basé sur l\'IA pour détecter la désinformation et les fake news avec une précision exceptionnelle de 99.72%',
         'discover_btn': 'DÉCOUVRIR LE SYSTÈME',
         'tab_text': 'Analyse de Texte',
         'tab_file': 'Téléchargement de Fichier',
@@ -1054,7 +1054,7 @@ else:
             st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
             
             # Sections avec expanders
-            with st.expander("🤖 MODEL SPECIFICATIONS", expanded=False):
+            with st.expander("MODEL SPECIFICATIONS", expanded=False):
                 col1, col2 = st.columns(2)
                 
                 with col1:
@@ -1117,7 +1117,7 @@ else:
                         - Real: 15,474 (47.7%)
                         """)
             
-            with st.expander("🌍 LANGUAGES & TRANSLATION", expanded=False):
+            with st.expander("LANGUAGES & TRANSLATION", expanded=False):
                 col1, col2 = st.columns(2)
                 
                 with col1:
@@ -1138,7 +1138,7 @@ else:
                     - Real-time processing
                     """)
             
-            with st.expander("🏗️ SYSTEM ARCHITECTURE", expanded=False):
+            with st.expander("SYSTEM ARCHITECTURE", expanded=False):
                 col1, col2 = st.columns(2)
                 
                 with col1:
@@ -1179,7 +1179,7 @@ else:
                         - Design: IBM Plex Sans
                         """)
             
-            with st.expander("📁 INPUT SOURCES", expanded=False):
+            with st.expander("INPUT SOURCES", expanded=False):
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
@@ -1213,7 +1213,7 @@ else:
             
             if st.session_state.language == 'fr':
                 # ========== SECTION 1: VUE D'ENSEMBLE ==========
-                with st.expander("📋 VUE D'ENSEMBLE DU SYSTÈME", expanded=True):
+                with st.expander("VUE D'ENSEMBLE DU SYSTÈME", expanded=True):
                     st.markdown("""
                     Le **Détecteur de Fake News FCC** est un système avancé d'apprentissage automatique conçu pour identifier 
                     la désinformation et les fake news avec une précision de **98.34%**.
@@ -1226,7 +1226,7 @@ else:
                     """)
                 
                 # ========== SECTION 2: COMMENT ÇA FONCTIONNE ==========
-                with st.expander("⚙️ COMMENT ÇA FONCTIONNE", expanded=False):
+                with st.expander("COMMENT ÇA FONCTIONNE", expanded=False):
                     col1, col2 = st.columns(2)
                     
                     with col1:
@@ -1272,7 +1272,7 @@ else:
                         """)
                 
                 # ========== SECTION 3: GUIDE D'UTILISATION ==========
-                with st.expander("📖 GUIDE D'UTILISATION", expanded=False):
+                with st.expander("GUIDE D'UTILISATION", expanded=False):
                     tab1, tab2, tab3 = st.tabs(["Analyse Texte", "Upload Fichier", "Historique"])
                     
                     with tab1:
@@ -1315,7 +1315,7 @@ else:
                         """)
                 
                 # ========== SECTION 4: REPRODUIRE LE TRAVAIL ==========
-                with st.expander("🔬 REPRODUIRE NOTRE TRAVAIL (CODE COMPLET)", expanded=False):
+                with st.expander("REPRODUIRE NOTRE TRAVAIL (CODE COMPLET)", expanded=False):
                     tab1, tab2, tab3, tab4 = st.tabs(["Données", "Modèle", "API", "Frontend"])
                     
                     with tab1:
@@ -1464,7 +1464,7 @@ if st.button("Analyze"):
                         """, language='python')
                 
                 # ========== SECTION 5: MEILLEURES PRATIQUES ==========
-                with st.expander("✅ MEILLEURES PRATIQUES & LIMITATIONS", expanded=False):
+                with st.expander("MEILLEURES PRATIQUES & LIMITATIONS", expanded=False):
                     col1, col2 = st.columns(2)
                     
                     with col1:
@@ -1497,7 +1497,7 @@ if st.button("Analyze"):
                         """)
                 
                 # ========== SECTION 6: RESSOURCES ==========
-                with st.expander("📦 RESSOURCES & LIENS", expanded=False):
+                with st.expander("RESSOURCES & LIENS", expanded=False):
                     st.markdown("""
                     **Code Source**
                     - GitHub: https://github.com/noba-ibrahim/fcc-fake-news-detector-v2
@@ -1520,10 +1520,10 @@ if st.button("Analyze"):
                     """)
             
             else:  # VERSION ANGLAISE
-                with st.expander("📋 SYSTEM OVERVIEW", expanded=True):
+                with st.expander("SYSTEM OVERVIEW", expanded=True):
                     st.markdown("""
                     The **FCC Fake News Detector** is an advanced machine learning system designed to identify 
-                    misinformation and fake news with **98.34% accuracy**.
+                    misinformation and fake news with **99.72% accuracy**.
                     
                     **Key Points:**
                     - Model: Random Forest Optimized
@@ -1532,7 +1532,7 @@ if st.button("Analyze"):
                     - Architecture: Flask Backend + Streamlit Frontend
                     """)
                 
-                with st.expander("⚙️ HOW IT WORKS", expanded=False):
+                with st.expander("HOW IT WORKS", expanded=False):
                     col1, col2 = st.columns(2)
                     
                     with col1:
@@ -1577,7 +1577,7 @@ if st.button("Analyze"):
                         - Interactive charts
                         """)
                 
-                with st.expander("📖 USER GUIDE", expanded=False):
+                with st.expander("USER GUIDE", expanded=False):
                     tab1, tab2, tab3 = st.tabs(["Text Analysis", "File Upload", "History"])
                     
                     with tab1:
@@ -1619,7 +1619,7 @@ if st.button("Analyze"):
                         5. CSV export available
                         """)
                 
-                with st.expander("🔬 REPRODUCE OUR WORK (COMPLETE CODE)", expanded=False):
+                with st.expander("REPRODUCE OUR WORK (COMPLETE CODE)", expanded=False):
                     tab1, tab2, tab3, tab4 = st.tabs(["Data", "Model", "API", "Frontend"])
                     
                     with tab1:
@@ -1767,7 +1767,7 @@ if st.button("Analyze"):
     st.write(f"Confidence: {max(probs.values()):.2%}")
                         """, language='python')
                 
-                with st.expander("✅ BEST PRACTICES & LIMITATIONS", expanded=False):
+                with st.expander("BEST PRACTICES & LIMITATIONS", expanded=False):
                     col1, col2 = st.columns(2)
                     
                     with col1:
@@ -1799,7 +1799,7 @@ if st.button("Analyze"):
                         - Cross-check with other sources
                         """)
                 
-                with st.expander("📦 RESOURCES & LINKS", expanded=False):
+                with st.expander("RESOURCES & LINKS", expanded=False):
                     st.markdown("""
                     **Source Code**
                     - GitHub: https://github.com/noba-ibrahim/fcc-fake-news-detector-v2
