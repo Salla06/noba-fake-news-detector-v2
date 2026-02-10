@@ -1216,7 +1216,7 @@ else:
                 with st.expander("VUE D'ENSEMBLE DU SYSTÈME", expanded=True):
                     st.markdown("""
                     Le **Détecteur de Fake News FCC** est un système avancé d'apprentissage automatique conçu pour identifier 
-                    la désinformation et les fake news avec une précision de **98.34%**.
+                    la désinformation et les fake news avec une précision de **99.69%**.
                     
                     **Points Clés:**
                     - Modèle: Random Forest Optimisé
